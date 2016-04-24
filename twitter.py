@@ -16,6 +16,10 @@ table = 'twitter' # table you want to save
 table2 = 'user'
 con = MySQLdb.connect(user=users, passwd=passwd, host=host, db=db,use_unicode=0,charset='utf8')
 c = con.cursor()
+con.set_character_set('utf8')
+c.execute('SET NAMES utf8mb4;')
+c.execute('SET CHARACTER SET utf8mb4;')
+c.execute('SET character_set_connection=utf8mb4;')
 def get_all_tweets(screen_name):
 	#initialize a list to hold all the tweepy Tweets
 	alltweets = []		
@@ -43,7 +47,7 @@ if __name__ == '__main__':
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 	auth.set_access_token(access_key, access_secret)
 	api = tweepy.API(auth)
-	#pass in the username of the account you want to download
+	#pass in the username of the account you wa	nt to download
 	
 	query = "SELECT screen_name FROM %s;" % table2
 	c.execute(query)
@@ -51,14 +55,18 @@ if __name__ == '__main__':
 	count =0
 	#for users in result:
 	for users in result:
-		all = get_all_tweets("haobangpig")
-		for tweet in all:			
-			time=  [tweet.created_at]
-			str_time = time.date().isoformat()
-			id = [tweet.id_str]
-			language= [tweet.lang]
-			text = [tweet.text.encode("utf-8")]
-			#c.execute("INSERT INTO twitter (time, language,id,location,text) VALUES (%s,%s,%s,%s)",(time,language,id,text))
-			print str_time,id,language,text 
-		c.close()
+		try:
+			user=users[0]
+			all = get_all_tweets(user)
+			for tweet in all:
+				time = [tweet.created_at]
+				id = [tweet.id_str]
+				language= [tweet.lang]
+				text = [tweet.text.encode("utf-8")]
+				c.execute("INSERT INTO twitter (time,language,id,text) VALUES (%s,%s,%s,%s)",(time,language,id,text))
+		except Exception, e:
+			print e
+			c.execute("delete from user where screen_name=%s", users)
+			continue
+		c.execute("delete from user where screen_name=%s", users)
 		con.commit()
