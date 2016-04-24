@@ -7,10 +7,10 @@ import re
 import MySQLdb
 import time
 # Account
-consumer_key= 'Y3QHmimWrVJKySnjnAA1eWZTf'
-consumer_secret= 'm8MRiZFUSi50M4dYVJIzWvnUGeLSfn6FqgEKSr4bipCa6NvlXN'
-access_token= '717953299958247424-Au3CpITFDW7CpYzIZghzhfc34pQuGvz'
-access_token_secret= 'H32sWHVzy3J5ehbrycg22rfu805yabqYXgF7el7HQX6aP'
+consumer_key= 'xxx'
+consumer_secret= 'xxx'
+access_token= 'xx-xx'
+access_token_secret= 'xx'
 
 conn=MySQLdb.Connection("localhost","root","haobang","test");
 c = conn.cursor()
