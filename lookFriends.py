@@ -7,10 +7,10 @@ from tweepy.streaming import StreamListener
 from tweepy import API
 import tweepy
 import time
-ckey= 'Y3QHmimWrVJKySnjnAA1eWZTf'
-csecret= 'm8MRiZFUSi50M4dYVJIzWvnUGeLSfn6FqgEKSr4bipCa6NvlXN'
-atoken= '717953299958247424-Au3CpITFDW7CpYzIZghzhfc34pQuGvz'
-asecret= 'H32sWHVzy3J5ehbrycg22rfu805yabqYXgF7el7HQX6aP'
+ckey= 'xxx'
+csecret= 'xx'
+atoken= 'xx-xx'
+asecret= 'xx'
 
 #Therefore using the streaming api has three steps.
 #Create a class inheriting from StreamListener
